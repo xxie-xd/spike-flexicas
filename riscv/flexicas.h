@@ -7,6 +7,7 @@
 
 namespace flexicas {
   static const unsigned int CSR_FLEXICAS_PFC = 0x8F0;
+  static const unsigned int CSR_FLEXICAS_DLY = 0x8F1;
   extern int  ncore();
   extern int  cache_level();
   extern int  cache_set(int level, bool ic);
@@ -33,6 +34,22 @@ public:
 protected:
   virtual bool unlogged_write(const reg_t val) noexcept override {
     flexicas::csr_write(val, flexicas::CSR_FLEXICAS_PFC);
+    return true;
+  }
+};
+
+class flexicas_DLY_csr_t: public csr_t {
+public:
+  flexicas_DLY_csr_t(processor_t* const proc)
+    : csr_t(proc, flexicas::CSR_FLEXICAS_DLY) {}
+
+  virtual reg_t read() const noexcept override {
+    return flexicas::csr_read(flexicas::CSR_FLEXICAS_DLY);
+  }
+
+protected:
+  virtual bool unlogged_write(const reg_t val) noexcept override {
+    flexicas::csr_write(val, flexicas::CSR_FLEXICAS_DLY);
     return true;
   }
 };
