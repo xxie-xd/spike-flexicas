@@ -585,7 +585,7 @@ void state_t::reset(processor_t* const proc, reg_t max_isa)
       }
   }
 
-  csrmap[flexicas::CSR_FLAXICAS_PFC] = std::make_shared<flexicas_csr_t>(proc);
+  csrmap[flexicas::CSR_FLEXICAS_PFC] = std::make_shared<flexicas_csr_t>(proc);
 
   serialized = false;
 
